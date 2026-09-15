@@ -24,6 +24,10 @@ type Point = { x: number; y: number; color: string; radius?: number };
 
 const colors = ["coral", "blue", "green", "gold", "violet"];
 
+function stable(value: number) {
+  return Math.round(value * 1000) / 1000;
+}
+
 function random(seed: number) {
   const value = Math.sin(seed * 913.7) * 43758.5453;
   return value - Math.floor(value);
@@ -33,10 +37,10 @@ const cloud: Point[] = Array.from({ length: 190 }, (_, index) => {
   const angle = random(index + 4) * Math.PI * 2;
   const distance = Math.sqrt(random(index + 41));
   return {
-    x: 500 + Math.cos(angle) * distance * 340 + random(index + 77) * 55,
-    y: 350 + Math.sin(angle) * distance * 235,
+    x: stable(500 + Math.cos(angle) * distance * 340 + random(index + 77) * 55),
+    y: stable(350 + Math.sin(angle) * distance * 235),
     color: colors[Math.floor(random(index + 111) * colors.length)] ?? "blue",
-    radius: 2.5 + random(index + 9) * 2.2,
+    radius: stable(2.5 + random(index + 9) * 2.2),
   };
 });
 
