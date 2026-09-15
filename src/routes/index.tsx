@@ -82,15 +82,15 @@ function NetworkFlow() {
       >
         <defs>
           <filter id="soft-glow" x="-80%" y="-80%" width="260%" height="260%">
-            <feGaussianBlur stdDeviation="5" result="blur" />
+            <feGaussianBlur stdDeviation="3" result="blur" />
             <feMerge>
               <feMergeNode in="blur" />
               <feMergeNode in="SourceGraphic" />
             </feMerge>
           </filter>
           <filter id="strong-glow" x="-100%" y="-100%" width="300%" height="300%">
-            <feGaussianBlur stdDeviation="11" result="wide" />
-            <feGaussianBlur stdDeviation="3" result="near" />
+            <feGaussianBlur stdDeviation="7" result="wide" />
+            <feGaussianBlur stdDeviation="2" result="near" />
             <feMerge>
               <feMergeNode in="wide" />
               <feMergeNode in="near" />
