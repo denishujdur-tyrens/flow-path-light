@@ -101,7 +101,7 @@
   --sidebar-accent-foreground: oklch(0.208 0.042 265.755);
   --sidebar-border: oklch(0.929 0.013 255.508);
   --sidebar-ring: oklch(0.704 0.04 256.788);
-  --flow: oklch(0.87 0.15 190);
+  --flow: oklch(0.78 0.13 190);
   --node-coral: oklch(0.7 0.17 20);
   --node-blue: oklch(0.61 0.16 265);
   --node-green: oklch(0.72 0.14 145);
@@ -208,13 +208,13 @@
 }
 
 .flow-glow {
-  stroke-width: 16;
-  opacity: 0.36;
-  filter: blur(7px);
+  stroke-width: 10;
+  opacity: 0.18;
+  filter: blur(5px);
 }
 
 .flow-core {
-  stroke-width: 3.5;
+  stroke-width: 2.5;
   filter: url(#soft-glow);
 }
 
@@ -224,7 +224,7 @@
   animation: node-light 6s ease-in-out infinite;
 }
 
-.flow-spark { fill: oklch(0.98 0.05 190); }
+.flow-spark { fill: oklch(0.88 0.05 190); }
 
 @keyframes illuminate {
   0% { stroke-dashoffset: 1; opacity: 0.2; }
@@ -234,7 +234,7 @@
 
 @keyframes node-light {
   0%, 7% { opacity: 0.28; transform: scale(0.8); transform-origin: center; }
-  14%, 76% { opacity: 1; transform: scale(1.35); }
+  14%, 76% { opacity: 0.85; transform: scale(1.15); }
   88%, 100% { opacity: 0.28; transform: scale(0.8); }
 }
 
