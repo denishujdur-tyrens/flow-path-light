@@ -35,7 +35,7 @@ const cloud: Point[] = Array.from({ length: 190 }, (_, index) => {
   return {
     x: 500 + Math.cos(angle) * distance * 340 + random(index + 77) * 55,
     y: 350 + Math.sin(angle) * distance * 235,
-    color: colors[Math.floor(random(index + 111) * colors.length)],
+    color: colors[Math.floor(random(index + 111) * colors.length)] ?? "blue",
     radius: 2.5 + random(index + 9) * 2.2,
   };
 });
@@ -103,8 +103,8 @@ function NetworkFlow() {
 
         <g className="network-links">
           {cloud.map((point, index) => {
-            const target = cloud[(index * 17 + 23) % cloud.length];
-            const secondary = cloud[(index * 7 + 51) % cloud.length];
+            const target = cloud[(index * 17 + 23) % cloud.length] ?? point;
+            const secondary = cloud[(index * 7 + 51) % cloud.length] ?? point;
             return (
               <g key={`links-${index}`}>
                 <line x1={point.x} y1={point.y} x2={target.x} y2={target.y} />
