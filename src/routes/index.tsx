@@ -63,7 +63,10 @@ const pathPoints: Point[] = [
   { x: 995, y: 225, color: "flow", radius: 7 },
   { x: 1056, y: 247, color: "flow", radius: 6 },
   { x: 1110, y: 291, color: "flow", radius: 6 },
-  { x: 1170, y: 318, color: "flow", radius: 6 },
+  { x: 1155, y: 310, color: "flow", radius: 6 },
+  { x: 1190, y: 322, color: "flow", radius: 6 },
+  { x: 1220, y: 330, color: "flow", radius: 6 },
+  { x: 1240, y: 334, color: "flow", radius: 6 },
   { x: 1250, y: 334, color: "flow", radius: 8 },
 ];
 
