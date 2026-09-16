@@ -75,6 +75,8 @@ const pathData = pathPoints
   .join(" ");
 
 function NetworkFlow() {
+  const lastPoint = pathPoints[pathPoints.length - 1]!;
+
   return (
     <main className="network-stage" aria-label="Animated luminous network flow">
       <svg
@@ -152,13 +154,27 @@ function NetworkFlow() {
           {pathPoints.map((point, index) => (
             <circle
               key={`flow-node-${index}`}
+              className={
+                index === 0
+                  ? "flow-node-start"
+                  : index === pathPoints.length - 1
+                    ? "flow-node-end"
+                    : undefined
+              }
               cx={point.x}
               cy={point.y}
               r={point.radius}
-              style={{ animationDelay: `${(index / (pathPoints.length - 1)) * 5.4}s` }}
             />
           ))}
         </g>
+
+        <circle
+          className="flow-arrival"
+          cx={lastPoint.x}
+          cy={lastPoint.y}
+          r={lastPoint.radius + 4}
+          filter="url(#strong-glow)"
+        />
 
         <circle className="flow-spark" r="8" filter="url(#strong-glow)">
           <animateMotion dur="6s" repeatCount="indefinite" path={pathData} />
