@@ -45,7 +45,7 @@ const cloud: Point[] = Array.from({ length: 190 }, (_, index) => {
 });
 
 const pathPoints: Point[] = [
-  { x: 46, y: 380, color: "flow", radius: 7 },
+  { x: 46, y: 380, color: "flow", radius: 10 },
   { x: 126, y: 350, color: "flow", radius: 6 },
   { x: 190, y: 387, color: "flow", radius: 6 },
   { x: 258, y: 305, color: "flow", radius: 7 },
@@ -67,7 +67,7 @@ const pathPoints: Point[] = [
   { x: 1190, y: 322, color: "flow", radius: 6 },
   { x: 1220, y: 330, color: "flow", radius: 6 },
   { x: 1240, y: 334, color: "flow", radius: 6 },
-  { x: 1250, y: 334, color: "flow", radius: 8 },
+  { x: 1250, y: 334, color: "flow", radius: 11 },
 ];
 
 const pathData = pathPoints
