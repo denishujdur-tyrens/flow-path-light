@@ -241,6 +241,8 @@
 .flow-arrival {
   fill: oklch(0.99 0 0);
   opacity: 0;
+  transform-box: fill-box;
+  transform-origin: center;
   animation: arrival-halo 2.6s ease-out 10s both;
 }
 
@@ -279,18 +281,23 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .network-links line,
+  .network-nodes circle,
+  .flow-track,
   .flow-glow,
-  .flow-core {
-    animation: none;
-    stroke-dashoffset: 0;
-  }
-
-  .flow-node-end,
+  .flow-core,
+  .flow-nodes circle,
   .flow-arrival {
     animation: none;
   }
 
-  .flow-node-end { opacity: 1; }
+  .network-links line { opacity: 1; }
+  .flow-track { opacity: 1; }
+
+  .flow-glow,
+  .flow-core {
+    stroke-dashoffset: 0;
+  }
 
   .flow-spark { display: none; }
 }
