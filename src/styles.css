@@ -179,9 +179,14 @@
 .network-links line {
   stroke: oklch(0.72 0.04 235 / 0.22);
   stroke-width: 0.65;
+  opacity: 0;
+  animation: materialize 1.4s ease-out both;
 }
 
-.network-nodes circle { opacity: 0.76; }
+.network-nodes circle {
+  opacity: 0.76;
+  animation: materialize 1.4s ease-out both;
+}
 .node-coral { fill: var(--node-coral); }
 .node-blue { fill: var(--node-blue); }
 .node-green { fill: var(--node-green); }
@@ -194,6 +199,8 @@
   stroke-width: 2;
   stroke-linecap: round;
   stroke-linejoin: round;
+  opacity: 0;
+  animation: materialize 2s ease-out 0.9s both;
 }
 
 .flow-glow,
@@ -204,7 +211,7 @@
   stroke-linejoin: round;
   stroke-dasharray: 1;
   stroke-dashoffset: 1;
-  animation: illuminate 6s cubic-bezier(0.45, 0, 0.25, 1) infinite;
+  animation: illuminate 9s cubic-bezier(0.45, 0, 0.25, 1) 1.2s both;
 }
 
 .flow-glow {
@@ -220,42 +227,50 @@
 .flow-nodes circle {
   fill: var(--flow);
   opacity: 0.18;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: node-pop 0.9s ease-out both;
 }
 
 .flow-nodes .flow-node-start {
   fill: oklch(0.99 0 0);
   opacity: 0.92;
-}
-
-.flow-nodes .flow-node-end {
-  animation: arrive 6s cubic-bezier(0.45, 0, 0.25, 1) infinite;
+  animation: node-born 1.6s cubic-bezier(0.2, 0.7, 0.3, 1) both;
 }
 
 .flow-arrival {
   fill: oklch(0.99 0 0);
   opacity: 0;
-  animation: arrival-halo 6s cubic-bezier(0.45, 0, 0.25, 1) infinite;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: arrival-halo 2.6s ease-out 10s both;
 }
 
 .flow-spark { display: none; }
 
-@keyframes illuminate {
-  0% { stroke-dashoffset: 1; opacity: 0.2; }
-  76%, 90% { stroke-dashoffset: 0; opacity: 1; }
-  100% { stroke-dashoffset: 0; opacity: 0; }
+@keyframes materialize {
+  from { opacity: 0; }
 }
 
-@keyframes arrive {
-  0%, 70% { opacity: 0.18; }
-  79% { opacity: 1; }
-  92% { opacity: 0.8; }
-  100% { opacity: 0.18; }
+@keyframes illuminate {
+  from { stroke-dashoffset: 1; }
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes node-pop {
+  from { opacity: 0; transform: scale(0.3); }
+}
+
+@keyframes node-born {
+  0% { opacity: 0; transform: scale(0.2); }
+  60% { opacity: 1; transform: scale(1.25); }
+  100% { opacity: 0.92; transform: scale(1); }
 }
 
 @keyframes arrival-halo {
-  0%, 73% { opacity: 0; }
-  80% { opacity: 0.45; }
-  100% { opacity: 0; }
+  0% { opacity: 0; transform: scale(0.6); }
+  25% { opacity: 0.5; }
+  100% { opacity: 0; transform: scale(1.6); }
 }
 
 @media (max-width: 700px) {
@@ -266,18 +281,23 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .network-links line,
+  .network-nodes circle,
+  .flow-track,
   .flow-glow,
-  .flow-core {
-    animation: none;
-    stroke-dashoffset: 0;
-  }
-
-  .flow-node-end,
+  .flow-core,
+  .flow-nodes circle,
   .flow-arrival {
     animation: none;
   }
 
-  .flow-node-end { opacity: 1; }
+  .network-links line { opacity: 1; }
+  .flow-track { opacity: 1; }
+
+  .flow-glow,
+  .flow-core {
+    stroke-dashoffset: 0;
+  }
 
   .flow-spark { display: none; }
 }
