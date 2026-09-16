@@ -179,12 +179,16 @@
 .network-links line {
   stroke: oklch(0.72 0.04 235 / 0.22);
   stroke-width: 0.65;
-  animation: materialize 1.4s ease-out both;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: draw-link 1.4s cubic-bezier(0.3, 0, 0.4, 1) both;
 }
 
 .network-nodes circle {
   opacity: 0.76;
-  animation: materialize 1.4s ease-out both;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: node-spawn 1.8s cubic-bezier(0.4, 0, 0.45, 1) both;
 }
 .node-coral { fill: var(--node-coral); }
 .node-blue { fill: var(--node-blue); }
@@ -199,7 +203,7 @@
   stroke-linecap: round;
   stroke-linejoin: round;
   opacity: 0;
-  animation: materialize 2s ease-out 0.9s both;
+  animation: materialize 2.5s ease-out both;
 }
 
 .flow-glow,
@@ -210,7 +214,7 @@
   stroke-linejoin: round;
   stroke-dasharray: 1;
   stroke-dashoffset: 1;
-  animation: illuminate 9s cubic-bezier(0.45, 0, 0.25, 1) 1.2s both;
+  animation: illuminate 9s cubic-bezier(0.45, 0, 0.25, 1) both;
 }
 
 .flow-glow {
@@ -225,10 +229,20 @@
 
 .flow-nodes circle {
   fill: var(--flow);
-  opacity: 0.18;
+  opacity: 0.55;
   transform-box: fill-box;
   transform-origin: center;
-  animation: node-pop 0.9s ease-out both;
+  animation: node-flare 1.1s cubic-bezier(0.2, 0.7, 0.3, 1) both;
+}
+
+.flow-pulses circle {
+  fill: none;
+  stroke: var(--flow);
+  stroke-width: 1;
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: flow-pulse 1.6s ease-out both;
 }
 
 .flow-nodes .flow-node-start {
@@ -242,7 +256,7 @@
   opacity: 0;
   transform-box: fill-box;
   transform-origin: center;
-  animation: arrival-halo 2.6s ease-out 10s both;
+  animation: arrival-halo 3.4s ease-out both;
 }
 
 .flow-spark { display: none; }
@@ -251,9 +265,47 @@
   from { opacity: 0; }
 }
 
+@keyframes draw-link {
+  0% { stroke-dashoffset: 1; opacity: 0; }
+  25% { opacity: 1; }
+  100% { stroke-dashoffset: 0; opacity: 1; }
+}
+
+@keyframes node-spawn {
+  0% { opacity: 0; transform: scale(0.15); }
+  35% { opacity: 0.35; transform: scale(0.6); }
+  65% { opacity: 1; transform: scale(1.08); }
+  100% { opacity: 0.76; transform: scale(1); }
+}
+
+.node-halo {
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: halo-ignite 2.1s ease-out both;
+}
+
+@keyframes halo-ignite {
+  0% { opacity: 0; transform: scale(0.4); }
+  30% { opacity: 0.32; transform: scale(1.4); }
+  100% { opacity: 0; transform: scale(4.2); }
+}
+
 @keyframes illuminate {
   from { stroke-dashoffset: 1; }
   to { stroke-dashoffset: 0; }
+}
+
+@keyframes node-flare {
+  0% { opacity: 0; transform: scale(0.8); }
+  9% { opacity: 1; transform: scale(1.7); }
+  100% { opacity: 0.55; transform: scale(1); }
+}
+
+@keyframes flow-pulse {
+  0% { opacity: 0; transform: scale(0.7); }
+  9% { opacity: 0.55; transform: scale(1.5); }
+  100% { opacity: 0; transform: scale(4); }
 }
 
 @keyframes node-pop {
@@ -290,7 +342,23 @@
     animation: none;
   }
 
-  .network-links line { opacity: 1; }
+  .network-links line {
+    opacity: 1;
+    stroke-dashoffset: 0;
+  }
+
+  .network-nodes circle { opacity: 0.76; }
+
+  .node-halo,
+  .flow-pulses circle {
+    animation: none;
+    opacity: 0;
+  }
+
+  .flow-nodes circle {
+    animation: none;
+    opacity: 0.55;
+  }
   .flow-track { opacity: 1; }
 
   .flow-glow,
