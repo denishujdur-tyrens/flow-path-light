@@ -179,7 +179,6 @@
 .network-links line {
   stroke: oklch(0.72 0.04 235 / 0.22);
   stroke-width: 0.65;
-  opacity: 0;
   animation: materialize 1.4s ease-out both;
 }
 
