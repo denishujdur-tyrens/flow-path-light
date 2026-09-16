@@ -74,6 +74,9 @@ const pathData = pathPoints
   .map((point, index) => `${index === 0 ? "M" : "L"}${point.x} ${point.y}`)
   .join(" ");
 
+const revealDelay = (x: number) => `${(0.9 + (x / 1250) * 7.8).toFixed(2)}s`;
+const flowDelay = (x: number) => `${(1.2 + (x / 1250) * 9).toFixed(2)}s`;
+
 function NetworkFlow() {
   const lastPoint = pathPoints[pathPoints.length - 1]!;
 
@@ -116,9 +119,21 @@ function NetworkFlow() {
             const secondary = cloud[(index * 7 + 51) % cloud.length] ?? point;
             return (
               <g key={`links-${index}`}>
-                <line x1={point.x} y1={point.y} x2={target.x} y2={target.y} />
+                <line
+                  x1={point.x}
+                  y1={point.y}
+                  x2={target.x}
+                  y2={target.y}
+                  style={{ animationDelay: revealDelay(point.x) }}
+                />
                 {index % 3 === 0 && (
-                  <line x1={point.x} y1={point.y} x2={secondary.x} y2={secondary.y} />
+                  <line
+                    x1={point.x}
+                    y1={point.y}
+                    x2={secondary.x}
+                    y2={secondary.y}
+                    style={{ animationDelay: revealDelay(point.x) }}
+                  />
                 )}
               </g>
             );
@@ -130,6 +145,7 @@ function NetworkFlow() {
               y1={240 + index * 10}
               x2={1250}
               y2={334}
+              style={{ animationDelay: revealDelay(770 + index * 7) }}
             />
           ))}
         </g>
@@ -142,6 +158,7 @@ function NetworkFlow() {
               cx={point.x}
               cy={point.y}
               r={point.radius}
+              style={{ animationDelay: revealDelay(point.x) }}
             />
           ))}
         </g>
@@ -164,6 +181,11 @@ function NetworkFlow() {
               cx={point.x}
               cy={point.y}
               r={point.radius}
+              style={
+                index === 0
+                  ? undefined
+                  : { animationDelay: flowDelay(point.x) }
+              }
             />
           ))}
         </g>
