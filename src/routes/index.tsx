@@ -172,7 +172,7 @@ function NetworkFlow() {
           className="flow-arrival"
           cx={lastPoint.x}
           cy={lastPoint.y}
-          r={lastPoint.radius + 4}
+          r={(lastPoint.radius ?? 8) + 4}
           filter="url(#strong-glow)"
         />
 
